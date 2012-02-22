@@ -5,7 +5,7 @@ import org.skife.config.Default;
 import org.skife.config.DefaultNull;
 import org.skife.config.TimeSpan;
 
-public interface MetricsConfiguration {
+interface MetricsConfiguration {
 
     /**
      * Whether to enable anything at all.  If false, nothing happens

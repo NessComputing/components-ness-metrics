@@ -13,7 +13,7 @@ import com.yammer.metrics.core.MetricsRegistry;
 import com.yammer.metrics.reporting.GangliaReporter;
 
 @Singleton
-public class MetricsExporter {
+class MetricsExporter {
     private static final Log LOG = Log.findLog();
 
     private final MetricsRegistry registry;
