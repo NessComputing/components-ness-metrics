@@ -38,6 +38,10 @@ class MetricsExporter {
                 config.getReportingInterval(),
                 config.isCompressPackageNamesEnabled() ? "" : " not");
 
+        exportGanglia();
+    }
+
+    private void exportGanglia() throws IOException {
         if (config.isGangliaReportingEnabled()) {
             LOG.info("Reporting collected metrics to Ganglia at %s:%s with prefix %s",
                     config.getGangliaHostname(),
