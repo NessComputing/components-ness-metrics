@@ -34,7 +34,7 @@ class MetricsExporter {
             return; // Nothing to do
         }
 
-        LOG.info("Metrics will be collected and reported every %s and package names will%s be exported",
+        LOG.info("Metrics will be collected and reported every %s and package names will%s be shortened",
                 config.getReportingInterval(),
                 config.isCompressPackageNamesEnabled() ? "" : " not");
 
