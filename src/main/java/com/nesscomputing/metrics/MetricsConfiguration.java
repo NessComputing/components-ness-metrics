@@ -81,6 +81,6 @@ interface MetricsConfiguration {
      * Graphite port
      */
     @Config("ness.metrics.graphite.port")
-    @Default("3002")
+    @Default("2003")
     int getGraphitePort();
 }
