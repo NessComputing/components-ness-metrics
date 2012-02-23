@@ -11,6 +11,7 @@ import com.nesscomputing.logging.Log;
 import com.yammer.metrics.core.MetricPredicate;
 import com.yammer.metrics.core.MetricsRegistry;
 import com.yammer.metrics.reporting.GangliaReporter;
+import com.yammer.metrics.reporting.GraphiteReporter;
 
 @Singleton
 class MetricsExporter {
@@ -19,6 +20,7 @@ class MetricsExporter {
     private final MetricsRegistry registry;
     private final MetricsConfiguration config;
     private GangliaReporter gangliaReporter;
+    private GraphiteReporter graphiteReporter;
 
     @Inject
     MetricsExporter(MetricsRegistry registry, MetricsConfiguration config) {
@@ -39,6 +41,7 @@ class MetricsExporter {
                 config.isCompressPackageNamesEnabled() ? "" : " not");
 
         exportGanglia();
+        exportGraphite();
     }
 
     private void exportGanglia() throws IOException {
@@ -60,6 +63,23 @@ class MetricsExporter {
         }
     }
 
+    private void exportGraphite() throws IOException {
+        if (config.isGraphiteReportingEnabled()) {
+            LOG.info("Reporting collected metrics to Graphite at %s:%s with prefix %s",
+                    config.getGraphiteHostname(),
+                    config.getGraphitePort(),
+                    config.getGraphiteGroupPrefix());
+
+            graphiteReporter = new GraphiteReporter(
+                    registry,
+                    config.getGraphiteHostname(),
+                    config.getGraphitePort(),
+                    config.getGraphiteGroupPrefix());
+
+            graphiteReporter.start(config.getReportingInterval().getMillis(), TimeUnit.MILLISECONDS);
+        }
+    }
+
     @OnStage(LifecycleStage.STOP)
     public void unexportMetrics() {
         LOG.info("Shutting down metrics");
@@ -67,6 +87,11 @@ class MetricsExporter {
         if (gangliaReporter != null) {
             gangliaReporter.shutdown();
             gangliaReporter = null;
+        }
+
+        if (graphiteReporter != null) {
+            graphiteReporter.shutdown();
+            graphiteReporter = null;
         }
     }
 

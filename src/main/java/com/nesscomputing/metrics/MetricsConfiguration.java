@@ -56,4 +56,31 @@ interface MetricsConfiguration {
     @Default("8649")
     int getGangliaPort();
 
+    /**
+     * Whether to export metrics data to Graphite's Carbon database server
+     */
+    @Config("ness.metrics.graphite.enabled")
+    @Default("false")
+    boolean isGraphiteReportingEnabled();
+
+    /**
+     * Prefix for the Graphite data
+     */
+    @Config("ness.metrics.graphite.group-prefix")
+    @DefaultNull
+    String getGraphiteGroupPrefix();
+
+    /**
+     * Graphite hostname
+     */
+    @Config("ness.metrics.graphite.host")
+    @Default("localhost")
+    String getGraphiteHostname();
+
+    /**
+     * Graphite port
+     */
+    @Config("ness.metrics.graphite.port")
+    @Default("3002")
+    int getGraphitePort();
 }
