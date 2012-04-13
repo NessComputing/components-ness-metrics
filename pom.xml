@@ -23,7 +23,7 @@
   <description>Metrics configuration and control</description>
 
   <properties>
-    <dep.metrics.version>2.1.2-SNAPSHOT</dep.metrics.version>
+    <dep.metrics.version>2.1.2-NESS-1.0</dep.metrics.version>
   </properties>
 
   <dependencies>
