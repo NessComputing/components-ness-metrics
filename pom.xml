@@ -18,7 +18,7 @@
   <groupId>com.nesscomputing.components</groupId>
   <artifactId>ness-metrics</artifactId>
   <name>ness-metrics</name>
-  <version>0.2.0-SNAPSHOT</version>
+  <version>0.2.0</version>
   <packaging>jar</packaging>
   <description>Metrics configuration and control</description>
 
